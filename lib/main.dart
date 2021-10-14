@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:weather_app/provider/weatherProvider.dart';
 import 'package:weather_app/screens/loadingScreen.dart';
-import 'screens/weatherScreen.dart';
 
 void main() {
   runApp(MainApp());
@@ -19,17 +16,12 @@ class MainApp extends StatefulWidget {
 class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => WeatherProvider()),
-      ],
-      child: MaterialApp(
+    return MaterialApp(
         theme: ThemeData(
           textTheme: GoogleFonts.oxygenTextTheme(),
         ),
         home: LoadingScreen(),
-      ),
-    );
+      );
   }
 }
 

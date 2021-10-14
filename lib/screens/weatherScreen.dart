@@ -1,13 +1,13 @@
 // ignore_for_file: file_names
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:weather_app/services/conditionService.dart';
 import 'package:weather_app/widgets/weatherScreenWidgets.dart';
 
+
 class WeatherScreen extends StatefulWidget {
-  const WeatherScreen({Key? key, this.locationWeather}) : super(key: key);
+  const WeatherScreen({Key? key, this.locationWeather, this.countryData}) : super(key: key);
   final dynamic locationWeather;
+  final dynamic countryData;
 
   @override
   _WeatherScreenState createState() => _WeatherScreenState();
@@ -25,6 +25,28 @@ class _WeatherScreenState extends State<WeatherScreen> {
   String description = '';
   String code = '';
 
+  num feelsLike = 0;
+  num tempMin = 0;
+  num tempMax = 0;
+  num windDeg = 0;
+  String fullCountryName = '';
+
+  void getFullCountryName(List<dynamic> countryData, String countryCode){
+    setState(() {
+        if(countryData == 'failed'){
+            fullCountryName = '';
+        } else {
+        for(int  i=0; i<countryData.length; i++){
+            if(countryData[i]['Code'] == countryCode){
+               fullCountryName = countryData[i]['Name'];
+          }
+         }
+       }
+    });
+
+  }
+
+
   void updateUI(dynamic weatherData){
       setState(() {
         if(weatherData == 'failed'){
@@ -40,6 +62,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
           var condition = weatherData['weather'][0]['id'];
           backgroundImage = conditionModel.getWeatherImage(condition);
           description = weatherData['weather'][0]['main'];
+          feelsLike = weatherData['main']['feels_like'];
+          tempMin = weatherData['main']['temp_min'];
+          tempMax = weatherData['main']['temp_max'];
+          windDeg = weatherData['wind']['deg'];
         }
       });
   }
@@ -48,10 +74,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
   void initState() {
     super.initState();
     updateUI(widget.locationWeather);
+    getFullCountryName(widget.countryData, country);
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         children: [
@@ -79,6 +107,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
               ),
             ],
           ),
+          ReturnSlidingUpPanel(country: fullCountryName, cityName: cityName,
+              description: description, humidity: humidity,
+              temperature: temperature, feelsLike: feelsLike,
+              tempMin: tempMin, tempMax: tempMax, windSpeed: windSpeed, windDeg: windDeg),
         ],
       ),
     );

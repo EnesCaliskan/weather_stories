@@ -9,7 +9,6 @@ class WeatherService{
   NetworkHelper networkHelper = NetworkHelper();
   String apiKey = 'e5210f93cff5297ecea98cb0486a1d26';
 
-
   Future<dynamic> getCurrentLocationData() async {
 
     Position currentPosition = await networkHelper.getPosition();
@@ -44,7 +43,18 @@ class WeatherService{
 
   }
 
+  Future<dynamic> getCountryName() async{
+    String url = 'https://pkgstore.datahub.io/core/country-list/data_json/data/8c458f2d15d9f2119654b29ede6e45b8/data_json.json';
+    http.Response response = await http.get(Uri.parse(url));
 
+    if(response.statusCode == 200){
+      String data = response.body;
+      var decodedData = jsonDecode(data);
+      return decodedData;
+    } else {
+      return ('failed');
+    }
+  }
 
 
 }
