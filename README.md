@@ -1,16 +1,12 @@
-# weather_app
+# Weather Stories
 
-A new Flutter application.
+## Introduction
 
-## Getting Started
+Weather Stories is an application that displays the current conditions of weather and location information on the screen. As soon as the user opens the application, weather conditions and location information is getting displayed on the screen. In order to get user's current location , i used GeoLocator package. After that information is displayed, user can swipe up the main screen to reach more detailed information such as wind speed, wind direction, minimum and maximum temperature. To get the weather information, i used OpenWeather's Current Weather Data API. Also i used DataHub's "List of all countries with their 2 digit codes" repo to display full country name since that information was not provided by OpenWeather. Lastly, user can search any city in the world to get that city's current weather conditions.
 
-This project is a starting point for a Flutter application.
+For styling i used flutter_spinkit and google_fonts package.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Screen Capture
+<img src="https://media.giphy.com/media/piNTp505bVpcuOI3LH/giphy.gif" width=30% height=30%>
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
