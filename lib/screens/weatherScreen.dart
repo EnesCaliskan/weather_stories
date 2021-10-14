@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_app/services/conditionService.dart';
 import 'package:weather_app/widgets/weatherScreenWidgets.dart';
 
-
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({Key? key, this.locationWeather, this.countryData}) : super(key: key);
   final dynamic locationWeather;
@@ -43,9 +42,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
          }
        }
     });
-
   }
-
 
   void updateUI(dynamic weatherData){
       setState(() {
